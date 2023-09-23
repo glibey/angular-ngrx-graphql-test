@@ -1,0 +1,79 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <h5 class="card-title">
+          <div class="d-flex justify-content-between align-items-center">
+            <span>Id: {{ post.id }}</span>
+            <div class="actions">
+              <button
+                class="btn btn-sm btn-secondary me-2"
+                (click)="openModal(updateConfirmationModal, 'modal-lg')"
+              >
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="openModal(removeConfirmationModal, 'modal-sm')"
+              >
+                <i class="bi bi-trash3"></i>
+              </button>
+            </div>
+          </div>
+        </h5>
+        <p class="card-text">{{ post.title }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #removeConfirmationModal>
+  <div class="modal-body text-center">
+    <p>Are you sure you want to remove?</p>
+    <button type="button" class="btn btn-primary me-3" (click)="remove()">
+      Yes
+    </button>
+    <button type="button" class="btn btn-default" (click)="modalRef?.hide()">
+      No
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #updateConfirmationModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      aria-label="Close"
+      (click)="modalRef?.hide()"
+    >
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        [(ngModel)]="title"
+        placeholder="Type title..."
+      />
+    </div>
+    <div class="d-flex justify-content-center">
+      <button
+        type="button"
+        class="btn btn-primary me-3"
+        [disabled]="!title"
+        (click)="update()"
+      >
+        Update
+      </button>
+      <button type="button" class="btn btn-default" (click)="modalRef?.hide()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</ng-template>

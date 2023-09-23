@@ -1,0 +1,63 @@
+<button type="button" class="btn btn-primary" (click)="openModal(template)">
+  Create Post
+</button>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Create Post</h4>
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      aria-label="Close"
+      (click)="modalRef?.hide()"
+    >
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="title"
+            placeholder="Type title..."
+          />
+        </div>
+        <div class="mb-3">
+          <label for="body" class="form-label">Body:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="body"
+            [(ngModel)]="body"
+            placeholder="Type body..."
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button
+        type="button"
+        class="btn btn-primary me-3"
+        (click)="create()"
+        [disabled]="!title || (postItemLoading$ | async)"
+      >
+        <span
+          *ngIf="postItemLoading$ | async"
+          class="spinner-grow spinner-grow-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        Create
+      </button>
+      <button type="button" class="btn btn-default" (click)="modalRef?.hide()">
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,11 @@
+:host ::ng-deep {
+  ul {
+    margin: 0;
+  }
+
+  .card-title {
+    .actions {
+      visibility: hidden;
+    }
+  }
+}
